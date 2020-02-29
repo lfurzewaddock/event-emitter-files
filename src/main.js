@@ -1,14 +1,14 @@
-import { customEE } from "./event-emitter";
+import eventEmitter from "./event-emitter";
 
-const callback = function(num) {
+const cb = function(num) {
   console.log(`From the imported module, ping #${num}`);
 };
 
-customEE
+eventEmitter
   .once("ping", () => console.log("Pinging started!"))
-  .on("ping", callback)
+  .on("ping", cb)
   .on("ping", num => {
     if (num > 5) {
-      customEE.removeListener("ping", callback);
+      eventEmitter.removeListener("ping", cb);
     }
   });
